@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="Beállítások">
+        <setting label="Részletes információ előtöltése" type="bool" id="infopreload" default="False"/>
+	</category>
+    <category label="InputStream">
+        <setting id="inputstreamsettings" type="action" label="InputStream Adaptive beállítások" option="close" action="RunPlugin(plugin://plugin.video.moziklub/?action=inputStreamSettings)"></setting>
+    </category>
+</settings>
