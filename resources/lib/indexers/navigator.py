@@ -91,6 +91,8 @@ class navigator:
         self.endDirectory()
 
     def getItems(self, url, page):
+        if url.startswith(search_url):
+            url = "%s%s?" % (search_url, quote_plus(url[len(search_url):]))
         content = client.request("%s&page=%s" % (url, page))
         items = client.parseDOM(content, 'div', attrs={'class': 'col-lg-2'})
         for item in items:
@@ -180,7 +182,7 @@ class navigator:
                 file.write("\n".join(items))
                 file.close()
             for item in items:
-                self.addDirectoryItem(item, 'historysearch&url=%s%s?' % (search_url, quote_plus(item)), '', 'DefaultFolder.png')
+                self.addDirectoryItem(item, 'historysearch&url=%s%s' % (search_url, quote_plus(item)), '', 'DefaultFolder.png')
             if len(items) > 0:
                 self.addDirectoryItem('[COLOR red]Keresési előzmények törlése[/COLOR]', 'deletesearchhistory', '', 'DefaultFolder.png') 
         except:
@@ -199,7 +201,7 @@ class navigator:
             file = safeopen(self.searchFileName, "a")
             file.write("%s\n" % search_text)
             file.close()
-            self.getItems("%s%s?" % (search_url, quote_plus(search_text)), 1)
+            self.getItems("%s%s" % (search_url, search_text), 1)
 
 
     def playMovie(self, url):
